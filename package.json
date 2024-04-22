@@ -9,9 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.6",
+    "@ant-design/pro-components": "^2.6.4",
+    "@plasmicapp/cli": "^0.1.327",
     "@plasmicapp/loader-nextjs": "^1.0.370",
+    "@plasmicapp/react-web": "^0.2.329",
+    "@plasmicpkgs/antd5": "^0.0.225",
+    "@plasmicpkgs/plasmic-basic-components": "^0.0.210",
+    "@plasmicpkgs/plasmic-nav": "^0.0.161",
+    "@plasmicpkgs/plasmic-query": "^0.0.209",
+    "@plasmicpkgs/plasmic-rich-components": "^1.0.180",
+    "@plasmicpkgs/react-awesome-reveal": "^3.8.192",
+    "@plasmicpkgs/react-chartjs-2": "^1.0.96",
+    "axios": "^1.6.8",
+    "chart.js": "^4.4.2",
     "next": "14.1.4",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18"
   },
   "devDependencies": {
