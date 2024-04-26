@@ -150,10 +150,10 @@ function PlasmicPageLayout__RenderFunc(props) {
 
         __composite["0"]["path"] = `/dashboard`;
         __composite["1"]["name"] = "Law25";
-        __composite["1"]["path"] = `/law25`;
+        __composite["1"]["path"] = `/law25/[business_name]`;
         __composite["1"]["routes"] = (() => {
           const __composite = [{ path: null, name: null }];
-          __composite["0"]["path"] = `/law25`;
+          __composite["0"]["path"] = `/law25/[business_name]`;
           __composite["0"]["name"] = "overview";
           return __composite;
         })();

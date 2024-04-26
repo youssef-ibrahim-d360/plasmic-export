@@ -21,6 +21,7 @@ import {
   generateStateOnChangePropForCodeComponents,
   generateStateValueProp,
   initializeCodeComponentStates,
+  set as $stateSet,
   useCurrentUser,
   useDollarState
 } from "@plasmicapp/react-web";
@@ -66,28 +67,10 @@ function PlasmicDashboard__RenderFunc(props) {
   const stateSpecs = React.useMemo(
     () => [
       {
-        path: "currentbusiness",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "variable",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
         path: "wrapper.current",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ``
-      },
-      {
-        path: "variable2",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
         path: "table.selectedRowKey",
@@ -183,9 +166,9 @@ function PlasmicDashboard__RenderFunc(props) {
     directuscompanies: usePlasmicDataOp(() => {
       return {
         sourceId: "4ZYYADAQoesjszGqnyuasC",
-        opId: "7d59acf4-c639-42a0-98a1-db1742624048",
+        opId: "db83e9bd-e626-4b8f-8c13-485481b2a093",
         userArgs: {},
-        cacheKey: `plasmic.$.7d59acf4-c639-42a0-98a1-db1742624048.$.`,
+        cacheKey: `plasmic.$.db83e9bd-e626-4b8f-8c13-485481b2a093.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -285,7 +268,18 @@ function PlasmicDashboard__RenderFunc(props) {
                     className: classNames("__wab_instance", sty.table),
                     data: (() => {
                       try {
-                        return $queries.query2;
+                        return $queries.directuscompanies.data.response.data.map(
+                          obj => {
+                            const newObj = {};
+                            for (const key in obj) {
+                              const newKey = key
+                                .replace(/_/g, " ")
+                                .replace(/^\w/, c => c.toUpperCase());
+                              newObj[newKey] = obj[key];
+                            }
+                            return newObj;
+                          }
+                        );
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -306,17 +300,80 @@ function PlasmicDashboard__RenderFunc(props) {
                         { key: "Company name", fieldId: "Company name" },
                         { key: "Owner", fieldId: "Owner" },
                         { key: "email", fieldId: "email" },
-                        { key: "Status", fieldId: "Status" }
+                        { key: "Status", fieldId: "Status" },
+                        { key: "Email", fieldId: "Email" },
+                        { key: "Business name", fieldId: "Business name" },
+                        { key: "Date created", fieldId: "Date created" },
+                        {
+                          key: "User updated",
+                          fieldId: "User updated",
+                          isHidden: null
+                        },
+                        { key: "Team", fieldId: "Team", isHidden: null }
                       ];
 
                       __composite["0"]["isHidden"] = true;
+                      __composite["8"]["isHidden"] = true;
+                      __composite["9"]["isHidden"] = true;
                       return __composite;
                     })(),
                     onRowClick: async (rowKey, row, event) => {
                       const $steps = {};
+                      $steps["updateTableSelectedRowKey"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              operation: 0,
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["table", "selectedRowKey"]
+                              }
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateTableSelectedRowKey"] != null &&
+                        typeof $steps["updateTableSelectedRowKey"] ===
+                          "object" &&
+                        typeof $steps["updateTableSelectedRowKey"].then ===
+                          "function"
+                      ) {
+                        $steps["updateTableSelectedRowKey"] = await $steps[
+                          "updateTableSelectedRowKey"
+                        ];
+                      }
                       $steps["goToLaw25"] = true
                         ? (() => {
-                            const actionArgs = { destination: `/law25` };
+                            const actionArgs = {
+                              destination: `/law25/${(() => {
+                                try {
+                                  return $state.table.selectedRow[
+                                    "Business name"
+                                  ];
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()}`
+                            };
                             return (({ destination }) => {
                               if (
                                 typeof destination === "string" &&

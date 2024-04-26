@@ -119,6 +119,16 @@ function PlasmicNewPage__RenderFunc(props) {
         invalidatedKeys: null,
         roleId: null
       };
+    }),
+    getBusinesses: usePlasmicDataOp(() => {
+      return {
+        sourceId: "4ZYYADAQoesjszGqnyuasC",
+        opId: "db83e9bd-e626-4b8f-8c13-485481b2a093",
+        userArgs: {},
+        cacheKey: `plasmic.$.db83e9bd-e626-4b8f-8c13-485481b2a093.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
     })
   };
   if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
@@ -213,11 +223,9 @@ function PlasmicNewPage__RenderFunc(props) {
                           ? (() => {
                               const actionArgs = {
                                 customFunction: async () => {
-                                  return (() => {
-                                    return fetch(
-                                      "https://d360-t-dev-p-dev-app-directus-drj3a.ondigitalocean.app/flows/trigger/da812042-a1f5-4e70-a2ba-9e8bda5fb6e8"
-                                    );
-                                  })();
+                                  return fetch(
+                                    "https://d360-t-dev-p-dev-app-directus-drj3a.ondigitalocean.app/flows/trigger/da812042-a1f5-4e70-a2ba-9e8bda5fb6e8"
+                                  );
                                 }
                               };
                               return (({ customFunction }) => {
